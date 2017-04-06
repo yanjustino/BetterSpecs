@@ -15,7 +15,7 @@ PM> Install-Package BetterSpecs
 using BetterSpecs;
 
 [TestClass]
-public class SpecContextTests : SpecContext
+public class SpecContextTests : Spec
 {
   ...
 }
