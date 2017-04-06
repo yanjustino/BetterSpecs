@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>BetterSpecs</id>
+    <version>1.5</version>
+    <title>BetterSpecs</title>
+    <authors>EmergingCode</authors>
+    <owners>EmergingCode</owners>
+    <licenseUrl>https://github.com/emergingcode/BetterSpecs.git</licenseUrl>
+    <projectUrl>https://github.com/emergingcode/BetterSpecs.git</projectUrl>
+    <iconUrl>http://s.gravatar.com/avatar/88a142dcea1005152f4ee65c895a5907?s=80</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>xSpec "is a great tool in the behavior-driven development (BDD) process of writing human readable specifications that direct and validate the development of your application</description>
+    <releaseNotes>Adjste Let Object</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>BDD .net Tests</tags>
+  </metadata>
+</package>
