@@ -22,19 +22,25 @@ namespace BetterSpecs
 
         internal virtual void Invoke(Action action, string text)
         {
-            text = text.PadLeft(_ident + text.Length, ' ');
-
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine(text);
+            Console.WriteLine(Indent(_ident) + text);
             action.Invoke();
+        }
+        private string Indent(int count)
+        {
+            return "".PadLeft(count);
         }
     }
 
     public class Let
     {
         private readonly Dictionary<string, object> _values = new Dictionary<string, object>();
+
+        //TODO: This variable will be removed coming soon.
         private readonly Dictionary<string, Func<object>> _functions = new Dictionary<string, Func<object>>();
 
+        //TODO: This code will be removed coming soon. It doesn't have anyone utility in this context.
+        [Obsolete("Please change this call to method \"Get<T>(string key)\"")]
         public object this[string key]
         {
             get
@@ -48,16 +54,16 @@ namespace BetterSpecs
 
         public T Get<T>(string key)
         {
-            if (_values[key] == null)
-                _values[key] = _functions[key].Invoke();
+            object instance = default(T);
 
-            return (T)_values[key];
+            _values.TryGetValue(key, out instance);
+
+            return (T)instance;
         }
 
         public void Add(string key, Func<object> action)
         {
-            _functions.Add(key, action);
-            _values.Add(key, null);
+            _values.Add(key, action());
         }
     }
 
@@ -70,6 +76,13 @@ namespace BetterSpecs
     public class It : SpecObject
     {
         internal override void Before() => _ident = 8;
+
+        public It ExpectBeEqual()
+        {
+
+
+            return this;
+        }
     }
 
     public class Context : SpecObject
@@ -77,4 +90,3 @@ namespace BetterSpecs
         internal override void Before() => _ident = 4;
     }
 }
-
