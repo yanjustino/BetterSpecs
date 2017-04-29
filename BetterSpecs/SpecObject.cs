@@ -76,9 +76,92 @@ namespace BetterSpecs
 
     public class It : SpecObject
     {
-        internal override void Before() => _ident = 8;        
+        internal override void Before() => _ident = 8;
+        public Expect Expect { get; }
+        public It()
+        {
+            Expect = new Expect();
+        }
+
+        public Expect ExpectThatSubject()
+        {
+            return Expect;
+        }
     }
-    
+
+    public class Expect
+    {
+        public Expect BeEquals(object actualValue, object expectedValue)
+        {
+            actualValue.Should().Be(expectedValue);
+
+            return this;
+        }
+
+        public Expect NotBeEquals(object actualValue, object expectedValue)
+        {
+            actualValue.Should().NotBe(expectedValue);
+
+            return this;
+        }
+
+        public Expect BeNull(object actualValue)
+        {
+            actualValue.Should().BeNull();
+
+            return this;
+        }
+
+        public Expect NotBeNull(object actualValue)
+        {
+            actualValue.Should().NotBeNull();
+
+            return this;
+        }
+
+        public Expect BeGreatThan(int actualValue, int comparedValue)
+        {
+            actualValue.Should().BeGreaterThan(comparedValue);
+
+            return this;
+        }
+
+        public Expect BeLessThan(int actualValue, int comparedValue)
+        {
+            actualValue.Should().BeLessThan(comparedValue);
+
+            return this;
+        }
+
+        public Expect BeGreatThan(long actualValue, long comparedValue)
+        {
+            actualValue.Should().BeGreaterThan(comparedValue);
+
+            return this;
+        }
+
+        public Expect BeLessThan(long actualValue, long comparedValue)
+        {
+            actualValue.Should().BeLessThan(comparedValue);
+
+            return this;
+        }
+
+        public Expect BeGreatThan(decimal actualValue, decimal comparedValue)
+        {
+            actualValue.Should().BeGreaterThan(comparedValue);
+
+            return this;
+        }
+
+        public Expect BeLessThan(decimal actualValue, decimal comparedValue)
+        {
+            actualValue.Should().BeLessThan(comparedValue);
+
+            return this;
+        }
+    }
+
     public class Context : SpecObject
     {
         internal override void Before() => _ident = 4;
@@ -90,9 +173,6 @@ namespace BetterSpecs
 
         public void Assign<T>(T instance)
         {
-            if (instance == null)
-                throw new NullReferenceException("The instance needs to be instanciated");
-
             Data = instance;
         }
 

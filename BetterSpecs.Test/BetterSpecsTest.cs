@@ -12,7 +12,7 @@ namespace BetterSpecs.Test
             _betterSpecsFixture = new BetterSpecsFixture();
         }
 
-        [Fact(DisplayName="Describe->Let Should return User")]
+        [Fact(DisplayName="Describe Should check if LET returns an instance of User")]
         public void Describe_Let_Should_Returns_User()
         {
             _betterSpecsFixture.Describe["Teste do Teste"] = () =>
@@ -35,6 +35,28 @@ namespace BetterSpecs.Test
                 _betterSpecsFixture.Subject.Get<User>()
                     .Should()
                     .BeOfType<User>();
+            };
+        }
+
+        [Fact(DisplayName = "Check if Expected Values are Equals")]
+        public void Check_If_Expected_Values_Are_Equals()
+        {
+            _betterSpecsFixture.Describe["Teste do Teste"] = () =>
+            {
+                _betterSpecsFixture.Subject.Assign(new User(1, "José Roberto", "jose.roberto"));
+
+                _betterSpecsFixture.Subject.Get<User>()
+                    .Should()
+                    .BeOfType<User>();
+
+                _betterSpecsFixture.It["The login's property value shall be equals to 'jose.roberto'"] = () =>
+                {
+                    var currentSubject = _betterSpecsFixture.Subject.Get<User>();
+
+                    _betterSpecsFixture.It
+                        .ExpectThatSubject()
+                        .BeEquals(currentSubject.Login, "jose.roberto");
+                };
             };
         }
     }
