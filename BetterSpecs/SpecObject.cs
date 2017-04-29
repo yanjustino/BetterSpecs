@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentAssertions;
+using System;
 using System.Collections.Generic;
 
 namespace BetterSpecs
@@ -75,18 +76,29 @@ namespace BetterSpecs
 
     public class It : SpecObject
     {
-        internal override void Before() => _ident = 8;
-
-        public It ExpectBeEqual()
-        {
-
-
-            return this;
-        }
+        internal override void Before() => _ident = 8;        
     }
-
+    
     public class Context : SpecObject
     {
         internal override void Before() => _ident = 4;
+    }
+
+    public class Subject
+    {
+        private object Data { get; set; }
+
+        public void Assign<T>(T instance)
+        {
+            if (instance == null)
+                throw new NullReferenceException("The instance needs to be instanciated");
+
+            Data = instance;
+        }
+
+        public T Get<T>()
+        {
+            return (T)Data;
+        }
     }
 }

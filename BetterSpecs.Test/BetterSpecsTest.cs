@@ -12,8 +12,8 @@ namespace BetterSpecs.Test
             _betterSpecsFixture = new BetterSpecsFixture();
         }
 
-        [Fact]
-        public void Describe_Should()
+        [Fact(DisplayName="Describe->Let Should return User")]
+        public void Describe_Let_Should_Returns_User()
         {
             _betterSpecsFixture.Describe["Teste do Teste"] = () =>
             {
@@ -22,6 +22,19 @@ namespace BetterSpecs.Test
                 _betterSpecsFixture.Let.Get<User>("New User with Id equals to 1")
                 .Should()
                 .BeOfType<User>();
+            };
+        }
+
+        [Fact(DisplayName = "Describe Should have a User as Subject")]
+        public void Describe_Should_Have_A_Subject()
+        {
+            _betterSpecsFixture.Describe["Teste do Teste"] = () =>
+            {
+                _betterSpecsFixture.Subject.Assign(new User(1, "José Roberto", "jose.roberto"));
+                
+                _betterSpecsFixture.Subject.Get<User>()
+                    .Should()
+                    .BeOfType<User>();
             };
         }
     }
