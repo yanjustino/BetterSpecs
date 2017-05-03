@@ -22,42 +22,41 @@ namespace BetterSpecs
 
         internal virtual void Invoke(Action action, string text)
         {
-            text = text.PadLeft(_ident + text.Length, ' ');
-
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine(text);
+            Console.WriteLine(Indent(_ident) + text);
             action.Invoke();
+        }
+        private string Indent(int count)
+        {
+            return "".PadLeft(count);
         }
     }
 
     public class Let
     {
         private readonly Dictionary<string, object> _values = new Dictionary<string, object>();
-        private readonly Dictionary<string, Func<object>> _functions = new Dictionary<string, Func<object>>();
 
+        [Obsolete("Please change this call to method \"Get<T>(string key)\". This code will be removed as soon.")]
         public object this[string key]
         {
             get
             {
-                if (_values[key] == null)
-                    _values[key] = _functions[key].Invoke();
-
-                return _values[key];
+                return ((dynamic)_values[key])();
             }
         }
 
         public T Get<T>(string key)
         {
-            if (_values[key] == null)
-                _values[key] = _functions[key].Invoke();
+            dynamic instance = default(T);
 
-            return (T)_values[key];
+            _values.TryGetValue(key, out instance);
+
+            return (T)instance();
         }
 
         public void Add(string key, Func<object> action)
         {
-            _functions.Add(key, action);
-            _values.Add(key, null);
+            _values.Add(key, action());
         }
     }
 
@@ -70,6 +69,13 @@ namespace BetterSpecs
     public class It : SpecObject
     {
         internal override void Before() => _ident = 8;
+
+        public It ExpectBeEqual()
+        {
+
+
+            return this;
+        }
     }
 
     public class Context : SpecObject
@@ -77,4 +83,3 @@ namespace BetterSpecs
         internal override void Before() => _ident = 4;
     }
 }
-

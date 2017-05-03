@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.10
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSpecs", "BetterSpecs\BetterSpecs.csproj", "{D29D6B8F-8DD1-4DAD-9F0F-422F4C743432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSpecs.Test", "BetterSpecs.Test\BetterSpecs.Test.csproj", "{5C485204-4E71-4F70-9B17-CCC61A1FDDA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D29D6B8F-8DD1-4DAD-9F0F-422F4C743432}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D29D6B8F-8DD1-4DAD-9F0F-422F4C743432}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D29D6B8F-8DD1-4DAD-9F0F-422F4C743432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C485204-4E71-4F70-9B17-CCC61A1FDDA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C485204-4E71-4F70-9B17-CCC61A1FDDA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C485204-4E71-4F70-9B17-CCC61A1FDDA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C485204-4E71-4F70-9B17-CCC61A1FDDA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
