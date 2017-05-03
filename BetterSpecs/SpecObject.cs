@@ -36,29 +36,22 @@ namespace BetterSpecs
     {
         private readonly Dictionary<string, object> _values = new Dictionary<string, object>();
 
-        //TODO: This variable will be removed coming soon.
-        private readonly Dictionary<string, Func<object>> _functions = new Dictionary<string, Func<object>>();
-
-        //TODO: This code will be removed coming soon. It doesn't have anyone utility in this context.
-        [Obsolete("Please change this call to method \"Get<T>(string key)\"")]
+        [Obsolete("Please change this call to method \"Get<T>(string key)\". This code will be removed as soon.")]
         public object this[string key]
         {
             get
             {
-                if (_values[key] == null)
-                    _values[key] = _functions[key].Invoke();
-
-                return _values[key];
+                return ((dynamic)_values[key])();
             }
         }
 
         public T Get<T>(string key)
         {
-            object instance = default(T);
+            dynamic instance = default(T);
 
             _values.TryGetValue(key, out instance);
 
-            return (T)instance;
+            return (T)instance();
         }
 
         public void Add(string key, Func<object> action)
